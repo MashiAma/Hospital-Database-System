@@ -1,0 +1,29 @@
+CREATE TABLE patients (
+  id INT DEFAULT patient_id_seq.NEXTVAL PRIMARY KEY,
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255) NOT NULL,
+  date_of_birth DATE NOT NULL,
+  gender VARCHAR(10) NOT NULL,
+  age INT NOT NULL,
+  contact_number VARCHAR(20) NOT NULL,
+  address TEXT NOT NULL,
+  blood_group VARCHAR(5)
+);
+
+CREATE TABLE doctor (
+  id INT DEFAULT doctor_id_seq.NEXTVAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  nic VARCHAR(15) NOT NULL,
+  specialize VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE appointment_details (
+  id INT DEFAULT appointment_id_seq.NEXTVAL PRIMARY KEY,
+  patient_id INT NOT NULL,
+  doctor_id INT NOT NULL,
+  date VARCHAR(10) NOT NULL,
+  time VARCHAR(30) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  FOREIGN KEY (patient_id) REFERENCES patients(id),
+  FOREIGN KEY (doctor_id) REFERENCES doctor(id)
+);
